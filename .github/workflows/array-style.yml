@@ -2,8 +2,8 @@ name: array-style
 
 on:
   pull_request:
-    branches: ['main']
-    paths: ['.github/workflows/array-style.yml']
+    branches: [main]
+    paths: [README.md, .github/workflows/**]
 
 jobs:
   build:
