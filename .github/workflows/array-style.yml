@@ -3,7 +3,7 @@ name: array-style
 on:
   pull_request:
     branches: ['main']
-    paths: ['.github/array-style.yml']
+    paths: ['.github/workflows/array-style.yml']
 
 jobs:
   build:
