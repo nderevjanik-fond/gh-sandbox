@@ -1,0 +1,14 @@
+name: array-style
+
+on:
+  pull_request:
+    branches: [main]
+    paths: [README.md, .github/workflows/**]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Debug
+        run: echo "Hello World!"
