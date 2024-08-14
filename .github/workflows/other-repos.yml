@@ -1,0 +1,22 @@
+name: other-repos
+
+on:
+  workflow_dispatch:
+
+jobs:
+  access-other-repo:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Generate a Token
+        id: generate-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ vars.FOND_SERVICE_APP_ID }}
+          private-key: ${{ secrets.FOND_SERVICE_APP_PK }}
+
+      - name: Use the Token
+        env:
+          GH_TOKEN: ${{ steps.generate-token.outputs.token }}
+        run: gh issue list --repo anyperk/amazon-api
+
