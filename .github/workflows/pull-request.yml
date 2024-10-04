@@ -30,7 +30,7 @@ jobs:
                 prBody = `# staging -> production\nStaging PR: #${prNumber}\n${prBody}`;
               }
               
-              core.info(context);
+              core.info(JSON.stringify(context, null, 2));
               core.info(prTitle);
               core.info(prBody);
             core.endGroup();
