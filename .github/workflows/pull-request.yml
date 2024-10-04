@@ -30,6 +30,7 @@ jobs:
                 prBody = `# staging -> production\nStaging PR: #${prNumber}\n${prBody}`;
               }
               
+              core.info(context);
               core.info(prTitle);
               core.info(prBody);
             core.endGroup();
@@ -38,6 +39,7 @@ jobs:
               await github.rest.pulls.create({
                 base: "pull-request-poc",
                 body: prBody,
+                head: "${{ github.head_ref }}",
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 title: prTitle
