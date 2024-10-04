@@ -9,6 +9,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    permissions:
+      pull-requests: write
+
     steps:
       - name: Create Pull Request
         uses: actions/github-script@v7
@@ -17,7 +20,7 @@ jobs:
             core.startGroup("Prepare pull request");
               let prNumber = context.payload.pull_request.number;
               let prTitle = context.payload.pull_request.title;
-              let prBody = context.payload.pull_request.body;
+              let prBody = context.payload.pull_request.body || "";
 
               if (prTitle.startsWith("staging-release-")) {
                 prTitle = prTitle.replace("staging", "production");
