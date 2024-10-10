@@ -37,5 +37,5 @@ jobs:
         run: |
           git fetch
           git rebase origin/${{ inputs.current-branch }}
-          git push origin/${{ inputs.destination-branch }}
+          git push origin ${{ inputs.destination-branch }}
 
