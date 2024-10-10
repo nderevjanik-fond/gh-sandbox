@@ -1,0 +1,41 @@
+name: sync-branches
+
+on:
+  workflow_dispatch:
+    inputs:
+      current-branch:
+        type: string
+        required: true
+      destination-branch:
+        type: string
+        required: true
+
+jobs:
+  rebase:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Generate a Token
+        id: generate-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ vars.BRANCH_SYNCER_APP_ID }}
+          private-key: ${{ secrets.BRANCH_SYNCER_APP_PK }}
+
+      - name: Configure Git
+        run: |
+          git config --global user.name 'BranchSyncer[bot]'
+          git config --global user.email 'BranchSyncer[bot]@users.noreply.github.com>'
+
+      - name: Checkout ${{ inputs.destination-branch}} Branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.destination-branch }}
+          token: ${{ steps.generate-token.outputs.token }}
+
+      - name: Rebase From ${{ inputs.current-branch }} Branch
+        run: |
+          git fetch
+          git rebase origin/${{ inputs.current-branch }}
+          git push origin/${{ inputs.destination-branch }}
+
