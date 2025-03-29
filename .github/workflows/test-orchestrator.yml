@@ -1,0 +1,23 @@
+name: test-orchestrator
+
+on:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get changed files
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const changedFiles = await github.paginate(
+              github.rest.pulls.listFiles,
+              {
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: context.payload.pull_request.number,
+              }
+            );
+            console.log('Changed files:', changedFiles.map(file => file.filename));
