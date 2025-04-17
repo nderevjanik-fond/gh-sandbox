@@ -27,6 +27,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           OWNER: ${{ github.repository_owner }}
-          REPO: ${{ github.repository }}
+          PATTERN: "*-test.yml"
           PR: ${{ github.event.pull_request.number }}
-        run: deno run --allow-env --allow-net main.ts
+          REPO: ${{ github.repository }}
+        run: deno run --allow-env --allow-net --allow-read main.ts
