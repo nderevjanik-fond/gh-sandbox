@@ -1,5 +1,14 @@
 import { Octokit } from '@octokit/rest';
 import { expandGlob } from 'jsr:@std/fs';
+import { parse } from 'jsr:@std/yaml/parse';
+
+type GitHubWorkflowYaml = {
+  defaults: {
+    run: {
+      'working-directory': string;
+    };
+  };
+};
 
 const root = Deno.env.get('GITHUB_WORKSPACE');
 const token = Deno.env.get('GITHUB_TOKEN')!;
@@ -13,7 +22,9 @@ const octokit = new Octokit({
 });
 
 for await (const file of expandGlob(`.github/workflows/${pattern}`, { root })) {
-  console.log(file.path);
+  const contents = await Deno.readTextFile(file.path);
+  const yaml = parse(contents) as GitHubWorkflowYaml;
+  console.log(yaml.defaults.run['working-directory']);
 }
 
 const changedFiles = await octokit.paginate(
