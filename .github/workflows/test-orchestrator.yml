@@ -29,6 +29,6 @@ jobs:
           OWNER: ${{ github.repository_owner }}
           PATTERN: "*-test.yml"
           PR: ${{ github.event.pull_request.number }}
-          REF: ${{ github.head_ref }}
+          REF: "refs/heads/${{ github.head_ref }}"
           REPO: ${{ github.repository }}
         run: deno run --allow-env --allow-net --allow-read main.ts
