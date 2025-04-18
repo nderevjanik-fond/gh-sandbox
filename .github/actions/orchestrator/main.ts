@@ -11,6 +11,7 @@ type GitHubWorkflowYaml = {
 };
 
 type WorkflowDetails = {
+  filePath: string;
   name: string;
   workingDirectory: string;
 };
@@ -32,6 +33,7 @@ for await (const file of expandGlob(`.github/workflows/${pattern}`, { root })) {
   const contents = await Deno.readTextFile(file.path);
   const yaml = parse(contents) as GitHubWorkflowYaml;
   const details: WorkflowDetails = {
+    filePath: `.github/workflows/${file.name}`,
     name: file.name,
     workingDirectory: yaml.defaults.run['working-directory'],
   };
@@ -63,7 +65,7 @@ for (const workflowDetails of matchingWorkflowDetails) {
   await octokit.rest.actions.createWorkflowDispatch({
     owner,
     repo,
-    workflow_id: workflowDetails.name,
+    workflow_id: workflowDetails.filePath,
     ref,
   });
 }
