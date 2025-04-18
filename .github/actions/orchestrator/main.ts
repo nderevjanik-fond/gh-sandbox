@@ -1,3 +1,4 @@
+import core from '@actions/core';
 import { Octokit } from '@octokit/rest';
 import { expandGlob } from 'jsr:@std/fs';
 import { parse } from 'jsr:@std/yaml/parse';
@@ -17,11 +18,12 @@ type WorkflowDetails = {
 };
 
 const root = Deno.env.get('GITHUB_WORKSPACE')!;
-const token = Deno.env.get('GITHUB_TOKEN')!;
-const owner = Deno.env.get('OWNER')!;
-const pattern = Deno.env.get('PATTERN');
-const pull_number = parseInt(Deno.env.get('PR')!, 10);
-const repo = Deno.env.get('REPO')!.replace(`${owner}/`, '');
+
+const token = core.getInput('github-token');
+const owner = core.getInput('owner');
+const pattern = core.getInput('pattern');
+const pull_number = parseInt(core.getInput('pr'), 10);
+const repo = core.getInput('repo').replace(`${owner}/`, '');
 
 const octokit = new Octokit({
   auth: token,
