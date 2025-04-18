@@ -25,6 +25,8 @@ const pattern = core.getInput('pattern');
 const pull_number = parseInt(core.getInput('pr'), 10);
 const repo = core.getInput('repo').replace(`${owner}/`, '');
 
+core.info(`pattern: ${pattern}`);
+
 const octokit = new Octokit({
   auth: token,
 });
