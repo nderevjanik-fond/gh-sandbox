@@ -1,8 +1,8 @@
 {
   "version": "4",
   "specifiers": {
-    "npm:@octokit/rest@^21.1.1": "21.1.1_@octokit+core@6.1.5",
-    "npm:@octokit/types@14": "14.0.0"
+    "npm:@octokit/rest@21.1.1": "21.1.1_@octokit+core@6.1.5",
+    "npm:@octokit/types@14.0.0": "14.0.0"
   },
   "npm": {
     "@octokit/auth-token@5.1.2": {
@@ -110,8 +110,8 @@
   },
   "workspace": {
     "dependencies": [
-      "npm:@octokit/rest@^21.1.1",
-      "npm:@octokit/types@14"
+      "npm:@octokit/rest@21.1.1",
+      "npm:@octokit/types@14.0.0"
     ]
   }
 }

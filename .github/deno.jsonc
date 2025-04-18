@@ -5,8 +5,8 @@
     "singleQuote": true
   },
   "imports": {
-    "@octokit/rest": "npm:@octokit/rest@^21.1.1",
-    "@octokit/types": "npm:@octokit/types@^14.0.0"
+    "@octokit/rest": "npm:@octokit/rest@21.1.1",
+    "@octokit/types": "npm:@octokit/types@14.0.0"
   },
   "lint": {
     "exclude": ["**/coverage/"]
