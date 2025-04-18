@@ -16,6 +16,6 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           owner: ${{ github.repository_owner }}
-          pattern: "*-test.yml"
+          pattern: '*-test.yml'
           pr: ${{ github.event.pull_request.number }}
           repo: ${{ github.repository }}
