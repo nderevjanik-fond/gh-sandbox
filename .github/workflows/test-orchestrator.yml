@@ -3,9 +3,6 @@ name: test-orchestrator
 on:
   pull_request:
 
-permissions:
-  actions: write
-
 jobs:
   test:
     runs-on: ubuntu-latest
