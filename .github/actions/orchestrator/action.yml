@@ -1,0 +1,42 @@
+name: orchestrator
+
+inputs:
+  github-token:
+    required: true
+  
+  owner:
+    required: true
+
+  pattern:
+    required: true
+
+  pr:
+    required: true
+
+  repo:
+    required: true
+
+runs:
+  using: composite
+
+  steps:
+      - name: Setup
+        uses: denoland/setup-deno@v2
+        with:
+          deno-version-file: .github/.tool-versions
+
+      - name: Install
+        run: |
+          cd ${{ github.action_path }}
+          deno install --frozen
+
+      - name: Run
+        env:
+          GITHUB_TOKEN: ${{ inputs.github-token }}
+          OWNER: ${{ inputs.owner }}
+          PATTERN: ${{ inputs.pattern }}
+          PR: ${{ inputs.pr }}
+          REPO: ${{ inputs.repo }}
+        run: |
+          cd ${{ github.action_path }}
+          deno run --allow-env --allow-net --allow-read main.ts

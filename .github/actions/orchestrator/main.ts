@@ -21,7 +21,6 @@ const token = Deno.env.get('GITHUB_TOKEN')!;
 const owner = Deno.env.get('OWNER')!;
 const pattern = Deno.env.get('PATTERN');
 const pull_number = parseInt(Deno.env.get('PR')!, 10);
-const ref = Deno.env.get('REF')!;
 const repo = Deno.env.get('REPO')!.replace(`${owner}/`, '');
 
 const octokit = new Octokit({
@@ -58,16 +57,4 @@ for (const workflowDetails of workflowDetailsList) {
   }
 }
 
-for (const workflowDetails of matchingWorkflowDetails) {
-  console.log(`changes detected in: ${workflowDetails.workingDirectory}`);
-  console.log(`dispatching workflow: ${workflowDetails.filePath}`);
-
-  const result = await octokit.rest.actions.createWorkflowDispatch({
-    owner,
-    repo,
-    workflow_id: workflowDetails.name,
-    ref,
-  });
-
-  console.log(result);
-}
+console.log(matchingWorkflowDetails);
