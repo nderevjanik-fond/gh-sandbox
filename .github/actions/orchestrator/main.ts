@@ -56,11 +56,11 @@ for (const workflowDetails of workflowDetailsList) {
   }
 }
 
-for (const workflowFile of matchingWorkflowFiles) {
+// for (const workflowFile of matchingWorkflowFiles) {
   await octokit.rest.actions.createWorkflowDispatch({
     owner,
     repo,
-    workflow_id: workflowFile,
+    workflow_id: "greeter.yml",
     ref,
   });
-}
+// }
