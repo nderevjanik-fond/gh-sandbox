@@ -62,10 +62,12 @@ for (const workflowDetails of matchingWorkflowDetails) {
   console.log(`changes detected in: ${workflowDetails.workingDirectory}`);
   console.log(`dispatching workflow: ${workflowDetails.filePath}`);
 
-  await octokit.rest.actions.createWorkflowDispatch({
+  const result = await octokit.rest.actions.createWorkflowDispatch({
     owner,
     repo,
     workflow_id: workflowDetails.name,
     ref,
   });
+
+  console.log(result);
 }
