@@ -5,5 +5,6 @@ import { truthyValue } from "../../lib/mod.ts";
 describe("bar", () => {
   it("has a passing test", () => {
     expect(truthyValue).toBeTruthy();
+    expect(truthyValue).not.toBeFalsy();
   });
 });
