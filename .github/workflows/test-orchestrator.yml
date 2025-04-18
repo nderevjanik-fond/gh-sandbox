@@ -7,6 +7,9 @@ defaults:
   run:
     working-directory: .github/actions/orchestrator
 
+permissions:
+  actions: write
+
 jobs:
   test:
     runs-on: ubuntu-latest
