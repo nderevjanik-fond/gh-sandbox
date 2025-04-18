@@ -1,0 +1,9 @@
+{
+  "tasks": {
+    "check": "deno check main.ts",
+    "format": "deno fmt",
+    "lint": "deno lint",
+    "test": "deno test --clean --coverage && deno coverage",
+    "coverage": "deno coverage --html && open coverage/html/index.html"
+  }
+}

@@ -1,0 +1,25 @@
+name: foo-test
+
+on:
+  workflow_dispatch:
+  workflow_call:
+
+defaults:
+  run:
+    working-directory: tools/foo
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup
+        uses: denoland/setup-deno@v2
+        with:
+          deno-version-file: .tool-versions
+
+      - name: Test
+        run: deno test

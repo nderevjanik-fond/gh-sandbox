@@ -1,0 +1,22 @@
+{
+  "fmt": {
+    "exclude": ["**/coverage/"],
+    "lineWidth": 120,
+    "singleQuote": true
+  },
+  "imports": {
+    "@octokit/rest": "npm:@octokit/rest@^21.1.1",
+    "@octokit/types": "npm:@octokit/types@^14.0.0"
+  },
+  "lint": {
+    "exclude": ["**/coverage/"]
+  },
+  "nodeModulesDir": "none",
+  "tasks": {
+    "test": "deno test --allow-all --clean --coverage && deno coverage",
+    "coverage": "deno coverage --html && open coverage/html/index.html"
+  },
+  "workspace": [
+    "./actions/orchestrator"
+  ]
+}
