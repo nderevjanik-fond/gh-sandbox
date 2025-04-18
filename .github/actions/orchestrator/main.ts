@@ -21,7 +21,7 @@ const root = Deno.env.get('GITHUB_WORKSPACE')!;
 
 const token = core.getInput('github-token');
 const owner = core.getInput('owner');
-const pattern = core.getInput('pattern');
+const pattern = core.getInput('pattern', { required: true });
 const pull_number = parseInt(core.getInput('pr'), 10);
 const repo = core.getInput('repo').replace(`${owner}/`, '');
 
