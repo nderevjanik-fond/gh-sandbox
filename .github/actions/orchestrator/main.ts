@@ -48,19 +48,22 @@ const results = await octokit.paginate(
 );
 const changedFiles = results.map((file) => file.filename);
 
-const matchingWorkflowFiles: string[] = [];
+const matchingWorkflowDetails: WorkflowDetails[] = [];
 for (const workflowDetails of workflowDetailsList) {
   const match = changedFiles.find((filename) => filename.startsWith(workflowDetails.workingDirectory));
   if (match) {
-    matchingWorkflowFiles.push(workflowDetails.name);
+    matchingWorkflowDetails.push(workflowDetails);
   }
 }
 
-for (const workflowFile of matchingWorkflowFiles) {
+for (const workflowDetails of matchingWorkflowDetails) {
+  console.log(`changes detected in: ${workflowDetails.workingDirectory}`);
+  console.log(`dispatching workflow: ${workflowDetails.name}`);
+
   await octokit.rest.actions.createWorkflowDispatch({
     owner,
     repo,
-    workflow_id: workflowFile,
+    workflow_id: workflowDetails.name,
     ref,
   });
 }
