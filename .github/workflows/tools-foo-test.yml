@@ -5,6 +5,7 @@ on:
     branches: main
     paths: 
       - .github/workflows/tools-foo-test.yml
+      - lib/** # Dependency
       - tools/foo/**
   workflow_call:
   workflow_dispatch:

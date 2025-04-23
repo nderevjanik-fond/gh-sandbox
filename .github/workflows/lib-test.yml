@@ -27,13 +27,3 @@ jobs:
 
       - name: Test
         run: deno test
-
-  # Dependent projects (tools-baz doesn't depend on lib):
-
-  tools-bar:
-    needs: test
-    uses: ./.github/workflows/tools-bar-test.yml
-
-  tools-foo:
-    needs: test
-    uses: ./.github/workflows/tools-foo-test.yml
