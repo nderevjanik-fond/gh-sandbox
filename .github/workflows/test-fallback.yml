@@ -1,0 +1,16 @@
+name: test-fallback
+
+on:
+  pull_request:
+    branches: main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Fallback message
+        run: |
+            echo "A fallback test job that always succeeds.
+            echo "Necessary for monorepos that use required PR checks."
+            exit 0
