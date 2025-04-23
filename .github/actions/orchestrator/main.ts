@@ -1,3 +1,4 @@
+import core from '@actions/core';
 import { Octokit } from '@octokit/rest';
 import { expandGlob } from 'jsr:@std/fs';
 import { parse } from 'jsr:@std/yaml/parse';
@@ -58,4 +59,4 @@ for (const workflowDetails of workflowDetailsList) {
   }
 }
 
-console.log(matchingWorkflowDetails);
+core.setOutput('json-results', { 'lib-test': true });
