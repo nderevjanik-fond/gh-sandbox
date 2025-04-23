@@ -11,7 +11,7 @@ permissions:
   actions: write
 
 jobs:
-  test:
+  test-orchestrator:
     runs-on: ubuntu-latest
 
     steps:
