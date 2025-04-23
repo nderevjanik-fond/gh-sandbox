@@ -1,2 +1,2 @@
 export const truthyValue = true;
-export const buggyTruthyValue = false;
+export const buggyTruthyValue = true;
