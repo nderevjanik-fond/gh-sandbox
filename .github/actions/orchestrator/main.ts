@@ -59,4 +59,4 @@ for (const workflowDetails of workflowDetailsList) {
   }
 }
 
-core.setOutput('json-results', { 'lib-test': true });
+core.setOutput('json-results', { 'lib-test': false });
