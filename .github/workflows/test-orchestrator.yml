@@ -15,7 +15,8 @@ jobs:
     runs-on: ubuntu-latest
 
     outputs:
-      json-results: ${{ steps.run.outputs.json-results }}
+      json-results: ${{ steps.run.outputs.json-results || '{}' }}
+
 
     steps:
       - name: Checkout
@@ -41,6 +42,6 @@ jobs:
         run: deno run --allow-env --allow-net --allow-read main.ts
 
   lib-test:
-    if: fromJSON(needs.test-orchestrator.outputs.json-results).lib-test == true
+    if: ${{ fromJSON(needs.test-orchestrator.outputs.json-results).lib-test == true }}
     needs: test-orchestrator
     uses: ./.github/workflows/lib-test.yml
