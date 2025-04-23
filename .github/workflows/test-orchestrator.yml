@@ -11,8 +11,11 @@ permissions:
   actions: write
 
 jobs:
-  test:
+  test-orchestrator:
     runs-on: ubuntu-latest
+
+    outputs:
+      json-results: ${{ steps.run.outputs.json-results }}
 
     steps:
       - name: Checkout
@@ -27,6 +30,7 @@ jobs:
         run: deno install --frozen
 
       - name: Run
+        id: run
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           OWNER: ${{ github.repository_owner }}
@@ -35,3 +39,8 @@ jobs:
           REF: "refs/heads/${{ github.head_ref }}"
           REPO: ${{ github.repository }}
         run: deno run --allow-env --allow-net --allow-read main.ts
+
+  lib-test:
+    if: fromJSON(needs.test-orchestrator.outputs.json-results).lib-test == true
+    needs: test-orchestrator
+    uses: ./.github/workflows/lib-test.yml
