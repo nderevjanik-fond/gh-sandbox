@@ -44,3 +44,18 @@ jobs:
     if: ${{ fromJSON(needs.test-orchestrator.outputs.json-results).lib-test == true }}
     needs: test-orchestrator
     uses: ./.github/workflows/lib-test.yml
+
+  tools-bar-test:
+    if: ${{ fromJSON(needs.test-orchestrator.outputs.json-results).tools-bar-test == true }}
+    needs: test-orchestrator
+    uses: ./.github/workflows/tools-bar-test.yml
+
+  tools-baz-test:
+    if: ${{ fromJSON(needs.test-orchestrator.outputs.json-results).tools-baz-test == true }}
+    needs: test-orchestrator
+    uses: ./.github/workflows/tools-baz-test.yml
+
+  tools-foo-test:
+    if: ${{ fromJSON(needs.test-orchestrator.outputs.json-results).tools-foo-test == true }}
+    needs: test-orchestrator
+    uses: ./.github/workflows/tools-foo-test.yml
