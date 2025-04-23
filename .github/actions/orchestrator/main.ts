@@ -22,7 +22,6 @@ const token = Deno.env.get('GITHUB_TOKEN')!;
 const owner = Deno.env.get('OWNER')!;
 const pattern = Deno.env.get('PATTERN');
 const pull_number = parseInt(Deno.env.get('PR')!, 10);
-const ref = Deno.env.get('REF')!;
 const repo = Deno.env.get('REPO')!.replace(`${owner}/`, '');
 
 const octokit = new Octokit({
@@ -35,7 +34,7 @@ for await (const file of expandGlob(`.github/workflows/${pattern}`, { root })) {
   const yaml = parse(contents) as GitHubWorkflowYaml;
   const details: WorkflowDetails = {
     filePath: `.github/workflows/${file.name}`,
-    name: file.name,
+    name: file.name.replace('.yml', '').replace('.yaml', ''),
     workingDirectory: yaml.defaults.run['working-directory'],
   };
   workflowDetailsList.push(details);
@@ -51,12 +50,16 @@ const results = await octokit.paginate(
 );
 const changedFiles = results.map((file) => file.filename);
 
-const matchingWorkflowDetails: WorkflowDetails[] = [];
+const matchingWorkflows = new Map<string, boolean>();
 for (const workflowDetails of workflowDetailsList) {
   const match = changedFiles.find((filename) => filename.startsWith(workflowDetails.workingDirectory));
   if (match) {
-    matchingWorkflowDetails.push(workflowDetails);
+    matchingWorkflows.set(workflowDetails.name, true);
+  } else {
+    matchingWorkflows.set(workflowDetails.name, false);
   }
 }
 
-core.setOutput('json-results', { 'lib-test': false });
+const jsonResults = JSON.stringify(Object.fromEntries(matchingWorkflows));
+core.info(jsonResults);
+core.setOutput('json-results', jsonResults);
