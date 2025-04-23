@@ -1,8 +1,12 @@
 name: lib-test
 
 on:
+  pull_request:
+    branches: main
+    paths: 
+      - .github/workflows/lib-test.yml
+      - lib/**
   workflow_dispatch:
-  workflow_call:
 
 defaults:
   run:
@@ -24,7 +28,7 @@ jobs:
       - name: Test
         run: deno test
 
-  # Dependent projects:
+  # Dependent projects (tools-baz doesn't depend on lib):
 
   tools-bar:
     needs: test

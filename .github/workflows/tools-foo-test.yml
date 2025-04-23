@@ -1,8 +1,13 @@
 name: foo-test
 
 on:
-  workflow_dispatch:
+  pull_request:
+    branches: main
+    paths: 
+      - .github/workflows/tools-foo-test.yml
+      - tools/foo/**
   workflow_call:
+  workflow_dispatch:
 
 defaults:
   run:
