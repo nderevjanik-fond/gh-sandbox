@@ -27,5 +27,5 @@ jobs:
 
       - name: Simulate Deployment
         run: |
-          echo "Simulating a deployment to ${{ inputs.deployment }}."
+          echo "Simulating a deployment to ${{ inputs.environment }}."
           echo "Pretending to use URL: ${{ vars.URL }}"
