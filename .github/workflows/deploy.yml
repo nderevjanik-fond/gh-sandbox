@@ -1,0 +1,31 @@
+name: deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        required: true
+        type: environment
+
+jobs:
+  simulate-deploy:
+    environment: ${{ inputs.environment }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Print Refs
+        run: |
+          echo "Head Ref: ${{ github.head_ref }}"
+          echo "Ref Name: ${{ github.ref_name }}"
+          echo "Ref: ${{ github.ref }}"
+
+      - name: List Files
+        run: ls -l
+
+      - name: Simulate Deployment
+        run: |
+          echo "Simulating a deployment to ${{ inputs.environment }}."
+          echo "Pretending to use URL: ${{ vars.URL }}"
