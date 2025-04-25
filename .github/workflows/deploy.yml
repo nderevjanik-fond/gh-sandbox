@@ -22,6 +22,9 @@ jobs:
           echo "Ref Name: ${{ github.ref_name }}"
           echo "Ref: ${{ github.ref }}"
 
+      - name: Print Commits
+        run: git log --oneline
+
       - name: List Files
         run: ls -l
 
