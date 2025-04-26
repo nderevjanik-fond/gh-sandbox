@@ -10,6 +10,7 @@ on:
 jobs:
   simulate-deploy:
     environment: ${{ inputs.environment }}
+    name: ${{ inputs.environment }}
     runs-on: ubuntu-latest
 
     steps:
@@ -30,7 +31,6 @@ jobs:
       - name: List Files
         run: ls -l
 
-      - name: Simulate Deployment
+      - name: Simulate Deployment to ${{ inputs.environment }}
         run: |
-          echo "Simulating a deployment to ${{ inputs.environment }}."
           echo "Pretending to use URL: ${{ vars.URL }}"
