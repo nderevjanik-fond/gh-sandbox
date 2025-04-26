@@ -1,0 +1,7 @@
+{
+  "tasks": {
+    "deploy:qa": "gh workflow run deploy -f environment=qa --ref $(git rev-parse --abbrev-ref HEAD)",
+    "release:staging": "gh workflow run deploy -f environment=staging --ref main",
+    "release:production": "gh workflow run deploy -f environment=production --ref main"
+  }
+}

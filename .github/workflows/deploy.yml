@@ -10,11 +10,14 @@ on:
 jobs:
   simulate-deploy:
     environment: ${{ inputs.environment }}
+    name: simulate-deploy-${{ inputs.environment }}
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Print Refs
         run: |
@@ -22,10 +25,12 @@ jobs:
           echo "Ref Name: ${{ github.ref_name }}"
           echo "Ref: ${{ github.ref }}"
 
+      - name: Print Commits
+        run: git log --oneline
+
       - name: List Files
         run: ls -l
 
-      - name: Simulate Deployment
+      - name: Simulate Deployment to ${{ inputs.environment }}
         run: |
-          echo "Simulating a deployment to ${{ inputs.environment }}."
           echo "Pretending to use URL: ${{ vars.URL }}"
