@@ -10,7 +10,7 @@ on:
 jobs:
   simulate-deploy:
     environment: ${{ inputs.environment }}
-    name: ${{ inputs.environment }}
+    name: simulate-deploy-${{ inputs.environment }}
     runs-on: ubuntu-latest
 
     steps:
