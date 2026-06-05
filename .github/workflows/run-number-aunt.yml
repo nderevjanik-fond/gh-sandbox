@@ -1,0 +1,17 @@
+name: run-number-aunt
+
+on:
+  pull_request: 
+
+jobs:
+  aunt:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Display Run Number
+        run: echo ${{ github.run_number }}
+
+  child-b:
+    uses: ./.github/workflows/run-number-child-b.yml
+    with:
+      parent-run-number: ${{ github.run_number }}

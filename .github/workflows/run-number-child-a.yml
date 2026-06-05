@@ -1,0 +1,19 @@
+name: run-number-child-a
+
+on:
+  workflow_call:
+    inputs:
+      parent-run-number:
+        required: true
+        type: string
+
+jobs:
+  child-a:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Display Run Number
+        run: echo ${{ github.run_number }}
+
+      - name: Display Parent Run Number
+        run: echo ${{ inputs.parent-run-number }}

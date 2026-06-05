@@ -1,0 +1,22 @@
+name: run-number-parent
+
+on:
+  pull_request: 
+
+jobs:
+  parent:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Display Run Number
+        run: echo ${{ github.run_number }}
+
+  child-a:
+    uses: ./.github/workflows/run-number-child-a.yml
+    with:
+      parent-run-number: ${{ github.run_number }}
+
+  child-b:
+    uses: ./.github/workflows/run-number-child-b.yml
+    with:
+      parent-run-number: ${{ github.run_number }}
